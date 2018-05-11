@@ -7,7 +7,6 @@ import fs from 'fs'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
 import routes from './modules/routes'
-import request from './utils/requestHelper'
 const devConfig = require("./webpack.config.js");
 var app = express()
 

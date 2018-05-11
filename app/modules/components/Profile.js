@@ -36,6 +36,12 @@ export default React.createClass({
                 //     }
                 })
               
+            } else if (e.key === 'Backspace') {
+                this.state.searchTerm = this.state.searchTerm.substring(0, this.state.searchTerm.length - 1);
+                if(this.state.searchTerm === "") {
+                    this.state.resultType = "recent";
+                }
+                this.forceUpdate();
             } else {
                 this.state.searchTerm += e.key;
                 this.forceUpdate();
@@ -52,7 +58,7 @@ export default React.createClass({
                     <div className = "prof_content">
                         <div className="container">
                             <div className="field-input">
-                                <input type="text" placeholder="Search..." value={this.state.searchTerm} onKeyPress={this._handleKeyPress}/><i className="fa fa-search search_btn"></i>
+                                <input type="text" placeholder="Search..." value={this.state.searchTerm} onKeyDown={this._handleKeyPress}/><i className="fa fa-search search_btn"></i>
                             </div>
                         </div>
 

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import localstorage from 'localStorage'
 import RecentData from '../../model/data/recent.json'
 
 export default React.createClass({
@@ -14,9 +14,31 @@ export default React.createClass({
 
     },
     componentWillReceiveProps(nextProps) {
-        let temp = [];
-        temp = (nextProps.type === "recent")?[]:temp.push(nextProps.data);
-        this.setState({ data: (nextProps.type === "recent")?RecentData:temp});
+        let search = [];
+        //(nextProps.type !== "recent")?search.push(nextProps.data);
+        let temp = JSON.parse(localstorage.getItem("recent_search"));
+        if(nextProps.type !== 'recent') {
+            search.push(nextProps.data);
+            if(temp) {
+                let exists = 0;
+                temp.map((item)=> {
+                    if(item.movie_id === nextProps.data.movie_id)
+                        exists = 1;
+                });
+                if(exists === 0)
+                    temp.push(nextProps.data);
+                localstorage.setItem("recent_search", JSON.stringify(temp));
+            } else {
+                localstorage.setItem("recent_search", JSON.stringify(search));
+            }
+            this.setState({ data: search});
+        } else {
+            if(temp) {
+                this.setState({data: temp});
+            } else {
+                this.setState({data: RecentData})
+            }
+        }
     },
     componentDidMount() {
         console.log("ComponentDidMount--League");
@@ -47,7 +69,7 @@ export default React.createClass({
                                     </span>
                                     <span className="details">
                                         <p className="title">{item.title}</p>
-                                        <p>{item.synopsis}</p>
+                                        <p>{item.overview}</p>
                                     </span>
                                 </div>
                     })}
