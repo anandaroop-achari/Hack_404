@@ -51,7 +51,7 @@ export default React.createClass({
        return <div className='login_modal'>
               <div className="logo">
                 <i className="logo_img" aria-hidden="true"></i> 
-                <span> App Name Here </span>
+                <span className="app_name"> 404 Found </span>
               </div>
               <form onSubmit={this.props.onLogin}>
                 <Input type='text' name='username' placeholder='username' />

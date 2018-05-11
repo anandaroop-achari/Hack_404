@@ -47,6 +47,11 @@
 .logo_img {
 	background-image: background-image: url(./images/tvo_white.png);
 }
+.app_name {
+  font-weight: 800;
+    color: #f6cd27;
+    font-family: sans-serif;
+}
 .logo i {
   	display: block;
     margin: 10px;
